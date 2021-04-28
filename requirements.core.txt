@@ -21,3 +21,4 @@ core_module_chemical_composition_simple_app==1.15.*
 core_module_text_area_app==1.15.*
 core_file_preview_app==1.13.*
 core_linked_records_app==1.0.0-beta6
+core-explore-periodic-table-app==1.3.* 

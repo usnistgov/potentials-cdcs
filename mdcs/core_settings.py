@@ -6,18 +6,45 @@ SERVER_URI = os.environ["SERVER_URI"] if "SERVER_URI" in os.environ else None
 
 # Website customization
 WEBSITE_SHORT_TITLE = "MDCS"
-CUSTOM_DATA = "Materials Data"
 CUSTOM_NAME = os.environ["SERVER_NAME"] if "SERVER_NAME" in os.environ else "Curator"
-CUSTOM_TITLE = "Materials Data Curation System"
-CUSTOM_SUBTITLE = "Part of the Materials Genome Initiative"
 CURATE_MENU_NAME = "Data Curation"
 WEBSITE_ADMIN_COLOR = "yellow"
+CUSTOM_CURATE='Data Curation'
+CUSTOM_DATA='Potentials Data'
+CUSTOM_TITLE='Interatomic Potentials Repository API'
+CUSTOM_SUBTITLE='Part of the Materials Genome Initiative'
+CUSTOM_NAME='NIST Potentials'
+CSRF_TRUSTED_ORIGINS=['test-potentials.nist.gov','129.6.18.178', '127.0.0.1','pn115004-d.nist.gov']
+CAN_ANONYMOUS_ACCESS_PUBLIC_DOCUMENT = True
+DISPLAY_NIST_HEADERS = True
+
+SAML2_AUTH = {
+    # Metadata is required, choose either remote url or local file path
+    'METADATA_AUTO_CONF_URL': 'https://sts2.nist.gov/federationmetadata/2007-06/federationmetadata.xml',
+    'METADATA_LOCAL_FILE_PATH': '/srv/curator/federationmetadata.xml',
+
+    # Optional settings below
+    'DEFAULT_NEXT_URL': '/',  # Custom target redirect URL after the user get logged in. Default to /admin if not set. This setting will be overwritten if you have parameter ?next= specificed in the login URL.
+    'CREATE_USER': False, # Create a new Django user when a new user logs in. Defaults to True.
+    'ATTRIBUTES_MAP': {  # Change Email/UserName/FirstName/LastName to corresponding SAML2 userprofile attributes.
+        'email': 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress',
+        'username': 'http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname',
+        'first_name': 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname',
+        'last_name': 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname',
+    },
+    'ASSERTION_URL': 'https://test-potentials.nist.gov', # Custom URL to validate incoming SAML requests against
+    'ENTITY_ID': 'https://test-potentials.nist.gov/saml2_auth/acs/', # Populates the Issuer element in authn request
+    'NAME_ID_FORMAT': 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient', # Sets the Format property of authn NameIDPolicy element
+    'USE_JWT': False,
+    'SAML_CLIENT_SETTINGS': False,
+    'SIGNOUT_SLO': {
+        'CERT':  '/srv/curator/certs/test-potentials.nist.gov-self.crt',
+        'KEY':   '/srv/curator/certs/test-potentials.nist.gov-self.key'
+    }
+}
 # black, black-light, blue, blue-light, green, green-light, purple, purple-light, red, red-light, yellow, yellow-light
 
-DATA_SOURCES_EXPLORE_APPS = [
-    "core_explore_federated_search_app",
-    "core_explore_oaipmh_app",
-]
+#DATA_SOURCES_EXPLORE_APPS = [ "core_explore_federated_search_app", "core_explore_oaipmh_app", ]
 
 # Lists in data not stored if number of elements is over the limit (e.g. 100)
 SEARCHABLE_DATA_OCCURRENCES_LIMIT = None
@@ -30,7 +57,7 @@ EXPLORE_ADD_DEFAULT_LOCAL_DATA_SOURCE_TO_QUERY = True
 """ boolean: Do we add the local data source to new queries by default
 """
 
-SSL_CERTIFICATES_DIR = True
+SSL_CERTIFICATES_DIR = False
 """ Either a boolean, in which case it controls whether requests verify the server's TLS certificate, 
 or a string, in which case it must be a path to a CA bundle to use.
 """

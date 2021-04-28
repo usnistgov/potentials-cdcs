@@ -1,26 +1,105 @@
 {% load staticfiles %}
+<style>
+    ul {
+        list-style: unset;
+    }
+    
+    li {
+        margin-left: 30px;
+    }
+    
+    .title-container {
+        width: 75%;
+        float: left;
+    }
+    
+    #mgi-diagram {
+        width: 300px;
+    }
+    
+    .custom-title {
+        margin-top: 91px;
+    }
+    
+    .description-container {
+        width: 67%;
+        float: left;
+        margin-top: 50px;
+    }
+    
+    #phasedata-diagram {
+        width: 100%;
+    }
+    
+    .phasedata-diagram-container {
+        width: 25%;
+        float: right;
+    }
+    
+    @media screen and (max-width: 1520px) {
+        .description-container {
+            width: 100%;
+        }
+    }
+    
+    @media screen and (max-width: 1072px) {
+        .description-container {
+            width: 100%;
+        }
+        .custom-title {
+            margin-top: 0;
+        }
+        #mgi-diagram {
+            margin-left: 52px;
+        }
+        .title-container {
+            width: 70%;
+        }
+        .phasedata-diagram-container {
+            width: 30%;
+        }
+    }
+    
+    @media screen and (max-width: 980px) {
+        .phasedata-diagram-container {
+            width: 50%
+        }
+        .title-container {
+            width: 50%;
+        }
+    }
+    
+    @media screen and (max-width: 890px) {
+        .phasedata-diagram-container {
+            width: 75%;
+            margin-left: 12%;
+            display: block;
+        }
+        .title-container {
+            width: 100%;
+            display: block;
+        }
+    }
+</style>
 <div class="row">
-    <div class="row justify-content-center" id="intro">
-        <div class="col-md-5">
-            <h2>{{ CUSTOM_TITLE }}</h2>
-            <p>
-                This system allows for the curation of Material Data in a repository using
-                predefined templates.
-            </p>
-            <p>
-                This is being developed at the National Institute of Standards and Technology and
-                is made available to solicit comments from the Material Science community. Please
-                do not enter any proprietary data into this system.
-            </p>
+    <div class="col-md-12">
+        <div class="row title-container">
+            <img id="mgi-diagram" src="/static/core_main_app/img/custom-diagram.png" alt="Interatomic Potentials Repository">
+            <h2 class="custom-title">{{ CUSTOM_TITLE }}</h2>
         </div>
-        <div class="col-md-3">
-            <img id="mgi-diagram" src="{% static 'core_main_app/img/mgi_diagram.jpg' %}"
-                 alt="Material Genome Initiative diagram">
+        <div class="phasedata-diagram-container">
+            <img id="phasedata-diagram" src="/static/core_main_app/img/custom-logo.png" alt="Ni stacking fault energy">
+        </div>
+        <div class="description-container">
+            <h1>Overview</h1>
+            <p class="large">
+            The NIST Interatomic Potentials Repository provides a source for interatomic potentials (force fields), related files, and evaluation tools to help researchers obtain interatomic models and judge their quality and applicability. This site is intended to serve as a machine-actionable addition to the existing repository (<a href="https://www.ctcms.nist.gov/potentials/">https://www.ctcms.nist.gov/potentials/</a>), and is based on NIST’s <a href="https://mgi.nist.gov/materials-data-curation-system">Materials Data Curation System</a> (MDCS).
+            </p>
         </div>
     </div>
 </div>
-<div class="row justify-content-center">
-    <div class="col-md-5" id="tiles">
+<div class="row">
+    <div class="col-md-5 col-md-offset-1" id="tiles">
     </div>
     <div class="col-md-5" id="templates">
     </div>
