@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     "core_explore_oaipmh_app",
     "core_explore_example_app",
     "core_explore_keyword_app",
+    "core_explore_periodic_table_app",
     "core_dashboard_app",
     "core_dashboard_common_app",
     "core_file_preview_app",
